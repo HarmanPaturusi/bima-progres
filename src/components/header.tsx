@@ -45,7 +45,7 @@ export function MainHeader({ children }: { children: React.ReactNode }) {
             <AlignJustify className="h-6 w-6" />
           </Button>
           <Link
-            href="#"
+            href="/dashboard"
             className="flex items-center gap-2 text-lg font-semibold"
           >
             <Package2 className="h-6 w-6" />
@@ -59,7 +59,7 @@ export function MainHeader({ children }: { children: React.ReactNode }) {
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder="Search products..."
+                  placeholder="Search paket..."
                   className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[700px] rounded-full"
                 />
               </div>
@@ -88,7 +88,7 @@ export function MainHeader({ children }: { children: React.ReactNode }) {
           "grid w-full min-h-screen",
           isMinimized
             ? "md:grid-cols-[70px_1fr]"
-            : "md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]",
+            : "md:grid-cols-[200px_1fr] lg:grid-cols-[280px_1fr]"
         )}
       >
         <div className="hidden border-r bg-muted/40 md:block">
@@ -105,7 +105,7 @@ export function MainHeader({ children }: { children: React.ReactNode }) {
                           "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
                           CurrentPage === item.href
                             ? "text-primary"
-                            : "text-muted-foreground",
+                            : "text-muted-foreground"
                         )}
                       >
                         <item.icon className="h-6 w-6" />

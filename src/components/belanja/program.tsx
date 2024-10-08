@@ -35,17 +35,19 @@ export async function ProgramBelanja() {
                   <div>{giat.kode.replace("X.XX", "1.03")}</div>
                   <div className="mb-3">{giat.nama}</div>
                 </div>
-                {dataSubGiat
-                  .filter((subgiats) => subgiats.giat_id === giat.id_giat)
-                  .map((subgiat) => (
-                    <SubGiatBelanja
-                      key={subgiat.id_subgiat}
-                      data={subgiat}
-                      akuns={dataAkun}
-                      subs={dataSubs}
-                      pakets={dataPaket}
-                    />
-                  ))}
+                <div className="ps-4">
+                  {dataSubGiat
+                    .filter((subgiats) => subgiats.giat_id === giat.id_giat)
+                    .map((subgiat) => (
+                      <SubGiatBelanja
+                        key={subgiat.id_subgiat}
+                        data={subgiat}
+                        akuns={dataAkun}
+                        subs={dataSubs}
+                        pakets={dataPaket}
+                      />
+                    ))}
+                </div>
               </div>
             ))}
           <Separator className="my-3" />

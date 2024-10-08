@@ -10,6 +10,7 @@ import {
 export const Menu: { href: string; label: string; icon: LucideIcon }[] = [
   { href: "/dashboard", label: "Dasbor", icon: LayoutDashboardIcon },
   { href: "/dashboard/paket", label: "Paket Belanja", icon: LayersIcon },
+  { href: "/dashboard/realisasi", label: "Realisasi", icon: LayersIcon },
   {
     href: "/dashboard/analytics",
     label: "Analytics",

@@ -1,5 +1,8 @@
-import { CarouselDinas } from "@/components/carousel-dinas";
-
+import { CarouselDinas } from "./components/carousel";
+import {
+  RealisasiBelanja,
+  RealisasiPendapatan,
+} from "./components/chart-realisasi";
 export default function Page() {
   return (
     <>
@@ -8,8 +11,10 @@ export default function Page() {
           <h1 className="text-lg font-semibold md:text-2xl">Dasbor</h1>
         </div>
         <div className="flex flex-1 justify-center">
-          <div className="flex flex-col items-center gap-4">
+          <div className="grid grid-cols-1 px-6">
             <CarouselDinas />
+            {/* <RealisasiBelanja />
+            <RealisasiPendapatan /> */}
             <div>Test</div>
           </div>
         </div>
