@@ -127,7 +127,7 @@ export function SideNav() {
                       "flex  gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
                       CurrentPage === item.href
                         ? "text-primary"
-                        : "text-muted-foreground",
+                        : "text-muted-foreground"
                     )}
                   >
                     <Tooltip>

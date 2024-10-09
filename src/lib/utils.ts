@@ -25,3 +25,10 @@ export const TanggalSekarang = () => {
 
   return formatIndonesia;
 };
+
+export const formatCurrency = (amount: number) => {
+  return amount.toLocaleString("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  });
+};
