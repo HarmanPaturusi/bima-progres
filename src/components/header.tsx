@@ -29,7 +29,7 @@ import { Menu } from "@/lib/menu";
 import { usePathname } from "next/navigation";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { ScrollArea } from "@/components/ui/scroll-area";
-export function MainHeader({ children }: { children: React.ReactNode }) {
+export function TopNav({ children }: { children: React.ReactNode }) {
   const [isMinimized, setIsMinimized] = useState(false);
   const CurrentPage = usePathname();
   return (
@@ -54,7 +54,7 @@ export function MainHeader({ children }: { children: React.ReactNode }) {
         </div>
         <div className="flex w-full items-center justify-between gap-4 md:ml-auto md:gap-2 lg:gap-4">
           <div className="w-full">
-            <form className="m-auto flex-1 max-w-[700px] hidden md:flex">
+            <form className="m-auto flex-1 max-w-[700px]">
               <div className="relative">
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -88,7 +88,7 @@ export function MainHeader({ children }: { children: React.ReactNode }) {
           "grid w-full min-h-screen",
           isMinimized
             ? "md:grid-cols-[70px_1fr]"
-            : "md:grid-cols-[200px_1fr] lg:grid-cols-[280px_1fr]"
+            : "md:grid-cols-[200px_1fr] lg:grid-cols-[280px_1fr]",
         )}
       >
         <div className="hidden border-r bg-muted/40 md:block">
@@ -105,7 +105,7 @@ export function MainHeader({ children }: { children: React.ReactNode }) {
                           "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
                           CurrentPage === item.href
                             ? "text-primary"
-                            : "text-muted-foreground"
+                            : "text-muted-foreground",
                         )}
                       >
                         <item.icon className="h-6 w-6" />

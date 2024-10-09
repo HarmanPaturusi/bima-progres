@@ -1,52 +1,16 @@
-import Link from "next/link";
-import {
-  Activity,
-  ArrowUpRight,
-  CircleUser,
-  CreditCard,
-  DollarSign,
-  Menu,
-  Package2,
-  Search,
-  Users,
-} from "lucide-react";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { MainHeader } from "@/components/header";
 import { BottomNav } from "@/components/bottom-nav";
+import { MobileNav, SideNav, TopNav } from "@/components/top-nav";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div className="flex w-full flex-col">
-        <MainHeader>{children}</MainHeader>
+        <TopNav />
+        <MobileNav />
+        <div className="grid w-full min-h-screen grid-cols-1 md:grid-cols-[70px_1fr] lg:grid-cols-[280px_1fr]">
+          <SideNav />
+          {children}
+        </div>
         <BottomNav />
       </div>
     </>

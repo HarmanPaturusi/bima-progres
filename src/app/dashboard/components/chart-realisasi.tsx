@@ -14,7 +14,13 @@ import {
 } from "@/components/ui/chart";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { ShoppingCart, Wallet } from "lucide-react";
+import {
+  ShoppingCart,
+  Wallet,
+  Circle,
+  CircleAlert,
+  CircleArrowUp,
+} from "lucide-react";
 import {
   Bar,
   BarChart,
@@ -31,20 +37,51 @@ export function RealisasiFisikDinas() {
   return (
     <Card>
       <CardHeader className="pb-2">
-        <CardDescription>Realisasi Fisik</CardDescription>
-        <CardTitle className="text-4xl">
-          32,9<span className="text-sm">%</span>
-        </CardTitle>
+        <CardTitle>Realisasi Belanja</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="text-xs text-muted-foreground">+25% from last week</div>
+      <CardContent className="grid grid-cols-[1fr,20px,1fr] gap-4 py-4">
+        <div>
+          <CardDescription>Fisik</CardDescription>
+          <div className="text-4xl font-semibold">
+            56,7<span className="text-sm">%</span>
+          </div>
+          <div className="text-xs text-muted-foreground flex flex-row gap-3 mt-3">
+            +25%{" "}
+            <span>
+              <CircleArrowUp className="h-4 w-4 text-primary" />
+            </span>
+          </div>
+          <Progress
+            value={56.7}
+            aria-label="25% increase"
+            className="my-3 h-1"
+          />
+        </div>
+        <div className="flex items-center justify-center">
+          <Separator orientation="vertical" />
+        </div>
+        <div>
+          <CardDescription>Keuangan</CardDescription>
+          <div className="text-4xl font-semibold">
+            90,5<span className="text-sm">%</span>
+          </div>
+          <div className="text-xs text-muted-foreground flex flex-row gap-3 mt-3">
+            +25%{" "}
+            <span>
+              <CircleArrowUp className="h-4 w-4 text-primary" />
+            </span>
+          </div>
+          <Progress
+            value={90.5}
+            aria-label="25% increase"
+            className="my-3 h-1"
+          />
+        </div>
       </CardContent>
-      <CardFooter>
-        <Progress value={25} aria-label="25% increase" />
-      </CardFooter>
     </Card>
   );
 }
+
 export function RealisasiKeuDinas() {
   return (
     <Card>
@@ -67,17 +104,65 @@ export function RealisasiPadDinas() {
   return (
     <Card>
       <CardHeader className="pb-2">
-        <CardDescription>Realisasi PAD</CardDescription>
-        <CardTitle className="text-4xl">
-          32,9<span className="text-sm">%</span>
-        </CardTitle>
+        <CardTitle>Realisasi PAD</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="text-xs text-muted-foreground">+25% from last week</div>
+      <CardContent className="grid grid-cols-[1fr,20px,2fr] gap-4 py-4">
+        <div>
+          <CardDescription>Total</CardDescription>
+          <div className="text-4xl font-semibold">
+            56,7<span className="text-sm">%</span>
+          </div>
+          <div className="text-xs text-muted-foreground flex flex-row gap-3 mt-3">
+            +25%{" "}
+            <span>
+              <CircleArrowUp className="h-4 w-4 text-primary" />
+            </span>
+          </div>
+          <Progress
+            value={56.7}
+            aria-label="25% increase"
+            className="my-3 h-1"
+          />
+        </div>
+        <div className="flex items-center justify-center">
+          <Separator orientation="vertical" />
+        </div>
+        <div>
+          <div className="flex justify-between items-baseline">
+            <div className="text-sm text-muted-foreground">PAL</div>
+            <div className="text-md font-semibold">
+              90,5<span className="text-sm text-muted-foreground">%</span>
+            </div>
+          </div>
+          <Progress
+            value={90.5}
+            aria-label="25% increase"
+            className="mb-2 h-1"
+          />
+          <div className="flex justify-between items-baseline">
+            <div className="text-sm text-muted-foreground">PBG</div>
+            <div className="text-md font-semibold">
+              90,5<span className="text-sm text-muted-foreground">%</span>
+            </div>
+          </div>
+          <Progress
+            value={80.5}
+            aria-label="25% increase"
+            className="mb-2 h-1"
+          />
+          <div className="flex justify-between items-baseline">
+            <div className="text-sm text-muted-foreground">LAB/AB</div>
+            <div className="text-md font-semibold">
+              90,5<span className="text-sm text-muted-foreground">%</span>
+            </div>
+          </div>
+          <Progress
+            value={80.5}
+            aria-label="25% increase"
+            className="mb-2 h-1"
+          />
+        </div>
       </CardContent>
-      <CardFooter>
-        <Progress value={25} aria-label="25% increase" />
-      </CardFooter>
     </Card>
   );
 }
