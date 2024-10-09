@@ -15,37 +15,32 @@ import {
   RealisasiPadDinas,
   RealisasiPendapatan,
 } from "./chart-realisasi";
-export function CarouselDinas() {
+import { RowDataPacket } from "mysql2";
+export function CarouselDinas({ belanja, pendapatan }: { belanja: { bobotF: number, bobotK: number }, pendapatan: { items: RowDataPacket[], total: number } }) {
   return (
     <>
       <div className="grid grid-cols-1">
         <Carousel
-          className="md:hidden w-full max-w-xs"
-          // plugins={[
-          //   Autoplay({
-          //     delay: 3000,
-          //   }),
-          // ]}
+          className="md:hidden w-full md:max-w-xs"
+        // plugins={[
+        //   Autoplay({
+        //     delay: 3000,
+        //   }),
+        // ]}
         >
           <CarouselContent>
             <CarouselItem>
-              <div className="p-1">
-                <RealisasiFisikDinas />
-              </div>
+              <RealisasiFisikDinas data={belanja} />
             </CarouselItem>
             <CarouselItem>
-              <div className="p-1">
-                <RealisasiPadDinas />
-              </div>
+              <RealisasiPadDinas data={pendapatan} />
             </CarouselItem>
           </CarouselContent>
-          {/* <CarouselPrevious />
-        <CarouselNext /> */}
         </Carousel>
       </div>
       <div className="hidden md:grid grid-cols-2 mx-auto items-center gap-6">
-        <RealisasiFisikDinas />
-        <RealisasiPadDinas />
+        <RealisasiFisikDinas data={belanja} />
+        <RealisasiPadDinas data={pendapatan} />
       </div>
     </>
   );

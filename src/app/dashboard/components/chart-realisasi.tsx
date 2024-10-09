@@ -14,13 +14,16 @@ import {
 } from "@/components/ui/chart";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
+import { getBobot } from "@/lib/utils";
 import {
   ShoppingCart,
   Wallet,
   Circle,
   CircleAlert,
   CircleArrowUp,
+  ArrowUp
 } from "lucide-react";
+import { RowDataPacket } from "mysql2";
 import {
   Bar,
   BarChart,
@@ -33,9 +36,9 @@ import {
   YAxis,
 } from "recharts";
 
-export function RealisasiFisikDinas() {
+export function RealisasiFisikDinas({ data }: { data: { bobotF: number, bobotK: number } }) {
   return (
-    <Card>
+    <Card className="h-[180px]">
       <CardHeader className="pb-2">
         <CardTitle>Realisasi Belanja</CardTitle>
       </CardHeader>
@@ -43,16 +46,16 @@ export function RealisasiFisikDinas() {
         <div>
           <CardDescription>Fisik</CardDescription>
           <div className="text-4xl font-semibold">
-            56,7<span className="text-sm">%</span>
+            {data.bobotF}<span className="text-sm">%</span>
           </div>
-          <div className="text-xs text-muted-foreground flex flex-row gap-3 mt-3">
+          {/* <div className="text-xs text-muted-foreground flex flex-row gap-3 mt-3">
             +25%{" "}
             <span>
-              <CircleArrowUp className="h-4 w-4 text-primary" />
+              <ArrowUp className="h-4 w-4 text-primary" />
             </span>
-          </div>
+          </div> */}
           <Progress
-            value={56.7}
+            value={data.bobotF}
             aria-label="25% increase"
             className="my-3 h-1"
           />
@@ -63,16 +66,16 @@ export function RealisasiFisikDinas() {
         <div>
           <CardDescription>Keuangan</CardDescription>
           <div className="text-4xl font-semibold">
-            90,5<span className="text-sm">%</span>
+            {data.bobotK}<span className="text-sm">%</span>
           </div>
-          <div className="text-xs text-muted-foreground flex flex-row gap-3 mt-3">
+          {/* <div className="text-xs text-muted-foreground flex flex-row gap-3 mt-3">
             +25%{" "}
             <span>
-              <CircleArrowUp className="h-4 w-4 text-primary" />
+              <ArrowUp className="h-4 w-4 text-primary" />
             </span>
-          </div>
+          </div> */}
           <Progress
-            value={90.5}
+            value={data.bobotK}
             aria-label="25% increase"
             className="my-3 h-1"
           />
@@ -100,26 +103,27 @@ export function RealisasiKeuDinas() {
     </Card>
   );
 }
-export function RealisasiPadDinas() {
+export function RealisasiPadDinas({ data }: { data: { items: RowDataPacket[], total: number } }) {
+
   return (
-    <Card>
+    <Card className="h-[180px]">
       <CardHeader className="pb-2">
         <CardTitle>Realisasi PAD</CardTitle>
       </CardHeader>
-      <CardContent className="grid grid-cols-[1fr,20px,2fr] gap-4 py-4">
+      <CardContent className="grid  grid-cols-[1fr,10px,1.5fr] gap-4 py-4">
         <div>
           <CardDescription>Total</CardDescription>
           <div className="text-4xl font-semibold">
-            56,7<span className="text-sm">%</span>
+            {data.total}<span className="text-sm">%</span>
           </div>
-          <div className="text-xs text-muted-foreground flex flex-row gap-3 mt-3">
+          {/* <div className="text-xs text-muted-foreground flex flex-row gap-3 mt-3">
             +25%{" "}
             <span>
-              <CircleArrowUp className="h-4 w-4 text-primary" />
+              <ArrowUp className="h-4 w-4 text-primary" />
             </span>
-          </div>
+          </div> */}
           <Progress
-            value={56.7}
+            value={data.total}
             aria-label="25% increase"
             className="my-3 h-1"
           />
@@ -127,40 +131,24 @@ export function RealisasiPadDinas() {
         <div className="flex items-center justify-center">
           <Separator orientation="vertical" />
         </div>
-        <div>
-          <div className="flex justify-between items-baseline">
-            <div className="text-sm text-muted-foreground">PAL</div>
-            <div className="text-md font-semibold">
-              90,5<span className="text-sm text-muted-foreground">%</span>
-            </div>
+        <div className="grid items-center">
+          <div>
+            {data.items.map((item, index) =>
+              <>
+                <div className="flex justify-between items-baseline" key={index}>
+                  <div className="text-sm text-muted-foreground">{item.alias}</div>
+                  <div className="text-md font-semibold">
+                    {getBobot(item.target, item.realisasi)}<span className="text-sm text-muted-foreground">%</span>
+                  </div>
+                </div>
+                {/* <Progress
+                value={getBobot(item.target, item.realisasi)}
+                aria-label="25% increase"
+                className="mb-2 h-1"
+              /> */}
+              </>
+            )}
           </div>
-          <Progress
-            value={90.5}
-            aria-label="25% increase"
-            className="mb-2 h-1"
-          />
-          <div className="flex justify-between items-baseline">
-            <div className="text-sm text-muted-foreground">PBG</div>
-            <div className="text-md font-semibold">
-              90,5<span className="text-sm text-muted-foreground">%</span>
-            </div>
-          </div>
-          <Progress
-            value={80.5}
-            aria-label="25% increase"
-            className="mb-2 h-1"
-          />
-          <div className="flex justify-between items-baseline">
-            <div className="text-sm text-muted-foreground">LAB/AB</div>
-            <div className="text-md font-semibold">
-              90,5<span className="text-sm text-muted-foreground">%</span>
-            </div>
-          </div>
-          <Progress
-            value={80.5}
-            aria-label="25% increase"
-            className="mb-2 h-1"
-          />
         </div>
       </CardContent>
     </Card>
@@ -231,7 +219,7 @@ export function RealisasiBelanja() {
   );
 }
 
-export function RealisasiPendapatan() {
+export function RealisasiPendapatan({ data }: { data: RowDataPacket[] }) {
   return (
     <Card className="max-w-sm">
       <CardHeader>

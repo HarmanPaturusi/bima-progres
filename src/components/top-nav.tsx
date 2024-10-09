@@ -34,7 +34,7 @@ export function TopNav() {
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder="Search paket..."
+                  placeholder="Telusuri paket..."
                   className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[700px] rounded-full"
                 />
               </div>
@@ -98,7 +98,7 @@ export function MobileNav() {
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder="Search paket..."
+                  placeholder="Telusuri paket..."
                   className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[700px] rounded-full"
                 />
               </div>
