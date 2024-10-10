@@ -80,12 +80,12 @@ export async function getSubsBelanja() {
   }
 }
 
-export async function getPaketBelanja(barjas?: number, tahun?: number) {
+export async function getPaketBelanja(barjas?: string, tahap?: string, tahun?: number) {
   const filterTahun = tahun?.toString() || getYear(new Date()).toString();
   const query = `
-  SELECT paket.id_paket, paket.nama as nama_paket, SUM(rincian.nilai) as pagu, paket.nilai as nilai, realK, bobotF,
+  SELECT paket.id_paket, paket.nama as nama_paket, SUM(rincian.nilai) as pagu, paket.nilai as nilai, realK, realF,
   paket.no_kontrak, paket.pelaksana, paket.pengawas, paket.mulai_kontrak, 
-  paket.akhir_kontrak, paket.tahun, paket.bl_id, paket.nip_teknis, tahap.nama as tahap, barjas_id,
+  paket.akhir_kontrak, paket.tahun, paket.bl_id, paket.nip_teknis, tahap.nama as tahap, paket.tahap_id as tahap_id, barjas_id,
   sub_bl.nama as sub_bl, barjas.keterangan as barjas, program.alias as program_alias
   FROM paket 
   JOIN rincian
@@ -107,12 +107,17 @@ export async function getPaketBelanja(barjas?: number, tahun?: number) {
   JOIN program
   ON program.id_program = giat.program_id
   WHERE paket.tahun = ${filterTahun}
-  ${barjas ? "AND barjas_id =" + barjas.toString() : ""} 
+  ${barjas ? "AND barjas_id =" + barjas : ''} 
   GROUP BY paket.id_paket
   ORDER BY program.id_program, paket.id_paket 
   `;
   try {
-    const [data] = await db.execute<RowDataPacket[]>(query);
+    const [dataPaket] = await db.execute<RowDataPacket[]>(query);
+    const data = dataPaket.map((item) => ({
+      ...item,
+      bobotF: getBobot(item.nilai, item.realF),
+      bobotK: getBobot(item.nilai, item.realK)
+    }))
     return data;
   } catch (error) {
     console.error("Database Error:", error);
@@ -195,5 +200,24 @@ export async function getBarjas() {
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Gagal mendapatkan data barjas.");
+  }
+}
+
+export async function getProgramBelanja() {
+  const query1 = `SELECT * FROM program`;
+  const query2 = `SELECT * FROM giat`;
+  const query3 = `SELECT * FROM subgiat`;
+  try {
+    const [data1] = await db.execute<RowDataPacket[]>(query1);
+    const [data2] = await db.execute<RowDataPacket[]>(query2);
+    const [data3] = await db.execute<RowDataPacket[]>(query3);
+    const data = data1.map((program) => ({
+      ...program,
+      giat: data2.filter((giats) => giats.program_id === program.id_program)
+    }))
+    return data;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Gagal mendapatkan data program belanja.");
   }
 }

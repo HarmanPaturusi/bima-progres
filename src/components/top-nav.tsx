@@ -16,6 +16,7 @@ import { Menu } from "@/lib/menu";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Separator } from "./ui/separator";
 export function TopNav() {
   return (
     <>
@@ -119,25 +120,33 @@ export function SideNav() {
           <div className="flex-1">
             <ScrollArea className="max-h-screen">
               <nav className="flex flex-col items-center lg:items-start justify-center lg:justify-start gap-4 p-4">
-                {Menu.map((item) => (
-                  <Link
-                    href={item.href}
-                    key={item.href}
-                    className={cn(
-                      "flex  gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
-                      CurrentPage === item.href
-                        ? "text-primary"
-                        : "text-muted-foreground"
-                    )}
-                  >
-                    <Tooltip>
-                      <TooltipTrigger>
-                        <item.icon className="h-6 w-6" />
-                      </TooltipTrigger>
-                      <TooltipContent>{item.label}</TooltipContent>
-                    </Tooltip>
-                    <div className="hidden lg:flex">{item.label}</div>
-                  </Link>
+                {Menu.map((item, index) => (
+                  !item.group ?
+                    <Link
+                      href={item.href}
+                      key={index}
+                      className={cn(
+                        "flex  gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
+                        CurrentPage === item.href
+                          ? "text-primary"
+                          : "text-muted-foreground"
+                      )}
+                    >
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <item.icon className="h-6 w-6" />
+                        </TooltipTrigger>
+                        <TooltipContent>{item.label}</TooltipContent>
+                      </Tooltip>
+                      <div className="hidden lg:flex">{item.label}</div>
+                    </Link>
+                    :
+                    <div key={index} className="flex  gap-3">
+                      <div className="hidden lg:flex">
+                        {item.group}
+                      </div>
+                      <Separator className="lg:hidden" />
+                    </div>
                 ))}
               </nav>
             </ScrollArea>
